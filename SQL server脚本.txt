@@ -1,0 +1,28 @@
+create database banktest;
+
+use banktest;
+
+create table user1(
+userName nvarchar(10),
+chrName nvarchar(10),
+upassword nvarchar(10),
+balance decimal(6,2),
+debt decimal(6,2),
+primary key(userName));
+
+go
+
+CREATE PROCEDURE total_user1  
+ @balance decimal(6, 2),
+  @total int OUTPUT  
+ AS
+ BEGIN
+	 SET NOCOUNT ON;  
+	 
+	 SELECT @total = COUNT(*)
+	 FROM user1
+	 WHERE balance > @balance;
+	 return 1;
+END;  
+insert into user1
+values(N'1234',N'admin',N'12345',12.25,0);
